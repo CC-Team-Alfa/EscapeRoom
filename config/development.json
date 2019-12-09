@@ -1,0 +1,6 @@
+{
+    "db": {
+        "first_part_name": "mongodb+srv://EscapeRoom:",
+        "second_part_name": "@escaperoom-fg8dx.mongodb.net/test?retryWrites=true&w=majority"
+    }
+}

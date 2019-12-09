@@ -1,0 +1,22 @@
+{
+  "name": "escape_room",
+  "version": "1.0.0",
+  "description": "Escape room App (backend in node and frontend in react)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "start-node": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "alfa_team_CodersCamp",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.2.4",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.14",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
