@@ -1,6 +1,10 @@
-Przed odpaleniem projektu należy ustawić zmienna środowiskową przechowywującą hasło do bazy danych zaby to zrobić należy w konsoli odpalić komendę:
-* Windows (set db_password=Qwe123Q)
-* Mac (export db_password=Qwe123Q)
+Przed odpaleniem projektu należy ustawić zmienne środowiskowe, żeby to zrobić należy w konsoli odpalić komendy:
+* Windows
+    set db_password=Qwe123Q
+    set jwt_privateKey={cokolwiek}
+* Mac 
+    export db_password=Qwe123Q
+    export jwt_privateKey={cokolwiek}
 
 Aby odpalić projekt za pomocą:
 * nodemon: (musimy wpisać w konsoli w folderze z projektem: npm start lub npm run start)
