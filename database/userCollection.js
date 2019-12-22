@@ -20,14 +20,13 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
         minlength: 8,
         maxlength: 1000
     },
-    bookings: [Schema.Types.ObjectId]
+    bookings: [mongoose.Schema.Types.ObjectId]
 });
 
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = function() {
     return jwt.sign({
         _id: this.id,
         username: this.username,
@@ -40,8 +39,8 @@ const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {
     const schema = {
-        username: Joi.string().min(6).max(21).required().unique(),
-        email: Joi.string().min(6).max(21).email().required().unique(),
+        username: Joi.string().min(6).max(21).required(),
+        email: Joi.string().min(6).max(21).email().required(),
         password: Joi.string().min(8).max(1000).required(),
         bookings: Joi.forbidden()
     };
