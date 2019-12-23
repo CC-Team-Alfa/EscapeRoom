@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     let exists = false;
     let reserve = await reservation.findOne({ $and: [{room: req.body.room}, {term: req.body.term}]});
     if (reserve) {
-        res.setHeader('Reservation_status', 'Reservation already exists');
+        res.setHeader('reservationStatus', 'Reservation already exists');
         res.status(400).send();
     } else {
         reserve = new reservation({
