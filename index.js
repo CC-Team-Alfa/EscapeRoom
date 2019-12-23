@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const home = require('./routes/home');
 const login = require('./routes/login');
 const register = require('./routes/register');
+const reservation = require('./routes/reservation');
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/', home);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/reservation', reservation);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
