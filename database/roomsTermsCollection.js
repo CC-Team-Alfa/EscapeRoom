@@ -5,20 +5,27 @@ const roomTermSchema = new mongoose.Schema({
     room: {
         type: Number,
         required: true,
+        enum: [1, 2, 3]
     },
     term: {
         type: Date,
-        required: true
+        required: true,
+        validate: {
+            validator: (value) => {
+                let hours = [6, 10, 14, 18, 22];
+                return hours.some(hour => hour == value.getHours());
+            },
+            message: "Invalid termin // DB error"
+        }
     }
-})
+});
 
 const roomTerm = mongoose.model('roomTerm', roomTermSchema);
 
 function validateRoomTerm(roomTerm) {
     const schema = {
-        username: Joi.string().min(6).max(21).required().unique(),
-        email: Joi.string().min(6).max(21).required().unique(),
-        password: Joi.string().min(8).max(1000).required()
+        room: Joi.number().allow(1,2,3),
+        term: Joi.date().greater(Date.now())
     }
 
     return Joi.validate(roomTerm, schema);

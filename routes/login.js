@@ -1,7 +1,7 @@
 const express = require('express');
 const JWT = require('jsonwebtoken');
 const passport = require('passport');
-const LoginStrategy = require('../middleware/passport-strategies').LoginStrategy;
+const {LoginStrategy} = require('../middleware/passport-strategies');
 
 const route = express.Router();
 

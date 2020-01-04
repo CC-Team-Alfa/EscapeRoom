@@ -8,7 +8,7 @@ router.post('/', async function(req, res) {
     const result = validate(req.body);
     if(result.error) {
         res.setHeader('regStatus', 'Invalid user data.')
-        return res.status(400).send();
+        return res.status(400).send(result.error.message);
     }
 
     let userCheckForEmail = await User.findOne({email: req.body.email});
@@ -16,7 +16,7 @@ router.post('/', async function(req, res) {
 
     if(userCheckForEmail || userCheckForUsername) {
         res.setHeader("regStatus", "User already registered.")
-        return res.status(400).send();
+        return res.status(400).send("User already registered.");
     } else {
         const salt = await bcrypt.genSalt(10);
         const hashedP = await bcrypt.hash(req.body.password, salt);
@@ -33,7 +33,7 @@ router.post('/', async function(req, res) {
             .catch(function (err) {
                 console.log(err);
                 res.setHeader("regStatus", "Database error");
-                return res.status(404).send();
+                return res.status(404).send("Database error");
             });
     }
 });

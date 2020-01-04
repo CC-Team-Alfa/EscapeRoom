@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        minlength: 6,
+        minlength: 3,
         maxlength: 21,
         unique: true
     },
@@ -23,15 +23,17 @@ const userSchema = new mongoose.Schema({
         minlength: 8,
         maxlength: 1000
     },
-    bookings: [mongoose.Schema.Types.ObjectId]
+    bookings: {
+        type: [mongoose.SchemaTypes.ObjectId],
+        ref: 'roomTerm'
+    }
 });
 
 userSchema.methods.generateAuthToken = function() {
     return jwt.sign({
         _id: this.id,
         username: this.username,
-        email: this.email,
-        bookings: this.bookings
+        email: this.email
     }, config.get('jwtPrivateKey'));
 };
 
@@ -39,7 +41,7 @@ const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {
     const schema = {
-        username: Joi.string().min(6).max(21).required(),
+        username: Joi.string().min(3).max(21).required(),
         email: Joi.string().min(6).max(21).email().required(),
         password: Joi.string().min(8).max(1000).required(),
         bookings: Joi.forbidden()

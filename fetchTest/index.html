@@ -1,0 +1,22 @@
+<script>
+    fetch("http://localhost:3000/reservation", {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            "x-auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTExMTdlNDM3ZGQxYjA1ODhiZDYyZGYiLCJ1c2VybmFtZSI6Im5vbWVuIiwiZW1haWwiOiJub21lbkB3cC5wbCIsImlhdCI6MTU3ODE3OTA5OX0._7hJ_WPRaxrnsm-W24knlGfkWkV5Lz_Kb1FJj7dkpjU"
+        },
+        body: JSON.stringify({
+            "room": 3,
+            "term": new Date(2020, 1, 10, 6)
+        })
+    })
+        .then(res => {
+            console.log('res :', res);
+            return res.text();
+        })
+        .then(res => {
+            console.log(res);
+            document.write(res);
+        })
+        .catch(er => console.error(er));
+</script>
