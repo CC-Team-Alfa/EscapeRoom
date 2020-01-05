@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const home = require('./routes/home');
 const login = require('./routes/login');
 const register = require('./routes/register');
+const roomsdates = require('./routes/roomsdates');
 const reservation = require('./routes/reservation');
 const account = require('./routes/account');
 
@@ -20,6 +21,7 @@ app.use(cors({ origin: "null" }));
 app.use('/', home);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/roomsdates', roomsdates);
 //protected routes:
 app.use('/reservation', reservation);
 app.use('/account', account);
