@@ -8,7 +8,6 @@ const route = express.Router();
 passport.use(LoginStrategy);
 
 route.post('/', passport.authenticate('local', {session: false}), (req, res) => {
-    //token będzie w  'req.user.token'
     res.setHeader('x-Auth-Token', req.user.token);
     return res.send('Logged in');
 });
