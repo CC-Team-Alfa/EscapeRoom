@@ -8,8 +8,6 @@ const router = express.Router();
 passport.use(AccesWithJWT);
 
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
-    console.log('req.body :', req.body);
-    console.log('req.user :', req.user);
     const result = validate(req.body);
     if(result.error) {
         console.log(result.error.message);
@@ -27,7 +25,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         });
         reserve.save()
             .then(async function() {
-                console.log('reserve :', reserve);
                 const user = await User.findById(req.user._id);
                 user.save();
                 user.bookings.push(reserve._id);

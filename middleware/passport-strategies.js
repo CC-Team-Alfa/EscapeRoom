@@ -20,10 +20,9 @@ const LoginStrategy = new LocalStrategy(async (username, password, done) => {
             //Creating JSON web token
             const token = user.generateAuthToken();
             //to acces this token check `req.user.token` in login route
-            return done(null, { token });
+            return done(null, { token, username });
         }
         else {
-            console.log(`Invalid password`);
             return done(null, false);
         }
     }

@@ -28,7 +28,7 @@ router.post('/', async function(req, res) {
         user.save()
             .then(function() {
                 res.setHeader("userId", user._id);
-                return res.status(201).send("Registerd Succesfully. Now Log in dumbass");
+                return res.status(201).send("Registerd Succesfully");
             })
             .catch(function (err) {
                 console.log(err);

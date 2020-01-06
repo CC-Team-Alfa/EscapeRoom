@@ -11,6 +11,8 @@ const roomsdates = require('./routes/roomsdates');
 const reservation = require('./routes/reservation');
 const account = require('./routes/account');
 const helmet = require('helmet');
+const compression = require('compression')
+const config = require('config');
 
 process.on('uncaughtException', (ex) => {
     console.log(ex.message, ex)
@@ -20,14 +22,14 @@ process.on('unhandledRejection', (ex) => {
     console.log(ex.message, ex)
 });
 
-app.set('view engine', 'pug');
-app.set('views', './views');
-
-mongoose.connect('mongodb://localhost/EscapeRoom', {useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => { console.log('Conected do db') })
+mongoose.connect(config.get('db'), {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => { console.log(`Connected to ${config.get('db')}`) })
     .catch(() => { console.log('Failed to connect to DataBase') });
 
-app.use(helmet());
+if (process.env.NODE_ENV == 'production') {
+    app.use(helmet());
+    app.use(compression());
+}
 app.use(express.json());
 app.use(cors({ origin: true }));
 

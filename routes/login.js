@@ -9,7 +9,7 @@ passport.use(LoginStrategy);
 
 route.post('/', passport.authenticate('local', {session: false}), (req, res) => {
     res.setHeader('x-Auth-Token', req.user.token);
-    return res.send('Logged in');
+    return res.send(`Logged in, visit account details at ${req.hostname}/account/${req.user.username}`);
 });
 
 module.exports = route;
