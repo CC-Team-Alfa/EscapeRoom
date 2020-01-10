@@ -23,10 +23,11 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             room: req.body.room,
             term: new Date(req.body.term),
         });
+        console.log('************************************************'')
+        console.log('req.body.term :', req.body.term);
+        console.log('new data req.body.term :', new Date(req.body.term));
         console.log('reserve.term :', reserve.term);
         console.log('local :', reserve.term.toLocaleDateString() + reserve.term.toLocaleTimeString());
-        console.log('reserve.term :', typeof reserve.term);
-        console.log('local :', typeof reserve.term.toLocaleDateString());
         reserve.save()
             .then(async function() {
                 const user = await User.findById(req.user._id);
