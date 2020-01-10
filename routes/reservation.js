@@ -12,16 +12,16 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
     if(result.error) {
         console.log(result.error.message);
         res.setHeader('reservationStatus', 'Invalid termin');
-        return res.status(400).send('Invalid termin');
+        return res.status(400).send('Date can not be from the past');
     }
     let reserve = await roomTerm.findOne({ $and: [{room: req.body.room}, {term: req.body.term}]});
     if (reserve) {
         res.setHeader('reservationStatus', 'Reservation already exists');
-        res.status(400).send('Reservation already exists');
+        res.status(409).send('Reservation already exists');
     } else {
         reserve = new roomTerm({
             room: req.body.room,
-            term: req.body.term,
+            term: new Date(req.body.term),
         });
         reserve.save()
             .then(async function() {
@@ -29,7 +29,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
                 user.save();
                 user.bookings.push(reserve._id);
                 res.setHeader('room', reserve.room);
-                res.status(201).send('Ok');
+                res.status(201).send(`You have succesfully reserved a termin in room: ${reserve.room} at ${reserve.term}`);
             })
             .catch(function(err) {
                 res.setHeader('reservationStatus', 'Database error');

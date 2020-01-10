@@ -31,8 +31,9 @@ if (process.env.NODE_ENV == 'production') {
     app.use(compression());
 }
 app.use(express.json());
-app.use(cors({ origin: true, allowedHeaders: 'content-length, content-type, x-auth-token',
+app.use(cors({ origin: '*', allowedHeaders: 'content-length, content-type, x-auth-token',
                 exposedHeaders:  'x-auth-token', credentials: true}));
+app.options('*', cors());
 
 app.use('/', home);
 app.use('/login', login);
