@@ -12,7 +12,7 @@ const roomTermSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: (value) => {
-                let hours = [6, 10, 14, 18, 22];
+                let hours = [5, 9, 13, 17, 21];
                 return hours.some(hour => hour == value.getHours());
             },
             message: "Invalid termin // DB error"
