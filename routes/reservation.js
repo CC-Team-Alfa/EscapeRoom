@@ -25,6 +25,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         });
         console.log('reserve.term :', reserve.term);
         console.log('local :', reserve.term.toLocaleDateString());
+        console.log('reserve.term :', typeof reserve.term);
+        console.log('local :', typeof reserve.term.toLocaleDateString());
         reserve.save()
             .then(async function() {
                 const user = await User.findById(req.user._id);
