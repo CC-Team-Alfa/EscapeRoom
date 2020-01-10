@@ -23,7 +23,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             room: req.body.room,
             term: new Date(req.body.term),
         });
-        console.log('************************************************'')
+        console.log('************************************************');
         console.log('req.body.term :', req.body.term);
         console.log('new data req.body.term :', new Date(req.body.term));
         console.log('reserve.term :', reserve.term);
