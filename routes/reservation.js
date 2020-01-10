@@ -24,7 +24,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             term: new Date(req.body.term),
         });
         console.log('reserve.term :', reserve.term);
-        console.log('local :', reserve.term.toLocaleDateString());
+        console.log('local :', reserve.term.toLocaleDateString() + reserve.term.toLocaleTimeString());
         console.log('reserve.term :', typeof reserve.term);
         console.log('local :', typeof reserve.term.toLocaleDateString());
         reserve.save()
